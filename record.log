@@ -1,0 +1,299 @@
+WANJI
+points: torch.Size([115195, 5])
+frame_id: (1,)
+gt_boxes: torch.Size([1, 25, 8])
+use_lead_xyz: torch.Size([1])
+voxels: torch.Size([34529, 100, 4])
+voxel_coords: torch.Size([34529, 4])
+voxel_num_points: torch.Size([34529])
+batch_size: 1
+voxel_features: torch.Size([34529, 4])
+encoded_spconv_tensor: <spconv.SparseConvTensor object at 0x7f525852a250>
+encoded_spconv_tensor_stride: 8
+multi_scale_3d_features: {'x_conv1': <spconv.SparseConvTensor object at 0x7f5258577eb0>, 
+                            'x_conv2': <spconv.SparseConvTensor object at 0x7f5258577fa0>, 
+                            'x_conv3': <spconv.SparseConvTensor object at 0x7f525852a040>, 
+                            'x_conv4': <spconv.SparseConvTensor object at 0x7f525852a160>}
+multi_scale_3d_strides: {'x_conv1': 1, 'x_conv2': 2, 'x_conv3': 4, 'x_conv4': 8}
+spatial_features: torch.Size([1, 512, 70, 72])
+spatial_features_stride: 8
+
+RuntimeError: Given groups=1, weight of size [128, 256, 3, 3], 
+expected input[1, 512, 72, 74] to have 256 channels, but got 512 channels instead
+"==========================================================================================================="
+KITTI
+frame_id : (2,)
+calib : (2,)
+gt_boxes : torch.Size([2, 12, 8])
+road_plane : torch.Size([2, 4])
+points : torch.Size([35973, 5])
+use_lead_xyz : torch.Size([2])
+voxels : torch.Size([28847, 5, 4])
+voxel_coords : torch.Size([28847, 4])
+voxel_num_points : torch.Size([28847])
+image_shape : (2, 2)
+batch_size : 2
+voxel_features : torch.Size([28847, 4])
+encoded_spconv_tensor : <spconv.SparseConvTensor object at 0x7f5f1d6492b0>
+encoded_spconv_tensor_stride : 8
+multi_scale_3d_features : {'x_conv1': <spconv.SparseConvTensor object at 0x7f5f1d737760>, 
+                            'x_conv2': <spconv.SparseConvTensor object at 0x7f5f1d649250>, 
+                            'x_conv3': <spconv.SparseConvTensor object at 0x7f5f1d649340>, 
+                            'x_conv4': <spconv.SparseConvTensor object at 0x7f5f1d6491c0>}
+multi_scale_3d_strides : {'x_conv1': 1, 'x_conv2': 2, 'x_conv3': 4, 'x_conv4': 8}
+spatial_features : torch.Size([2, 256, 200, 176])
+spatial_features_stride : 8
+"==========================================================================================================="
+KITTI
+frame_id: (2,)
+- calib: (2,)
+gt_boxes: (2, 4, 8)
+- road_plane: (2, 4)
+points: (36139, 5)
+use_lead_xyz: (2,)
+voxels: (28793, 5, 4)
+voxel_coords: (28793, 4)
+voxel_num_points: (28793,)
+- image_shape: (2, 2)
+batch_size: 2
+"==========================================================================================================="
+WANJI
+points: (230388, 5)
+frame_id: (2,)
+gt_boxes: (2, 38, 8)
+use_lead_xyz: (2,)
+voxels: (68683, 100, 4)
+voxel_coords: (68683, 4)
+voxel_num_points: (68683,)
+batch_size: 2
+"==========================================================================================================="
+KITTI_PDV.PY
+frame_id: (2,)
+- calib: (2,)
+gt_boxes: torch.Size([2, 4, 8])
+- road_plane: torch.Size([2, 4])
+points: torch.Size([38174, 5])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([31121, 5, 4])
+voxel_coords: torch.Size([31121, 4])
+voxel_num_points: torch.Size([31121])
+- image_shape: (2, 2)
+batch_size: 2
+"==========================================================================================================="   
+WANJI_PDV.PY
+points: torch.Size([230388, 5])
+frame_id: (2,)
+gt_boxes: torch.Size([2, 35, 8])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([68916, 100, 4])
+voxel_coords: torch.Size([68916, 4])
+voxel_num_points: torch.Size([68916])
+batch_size: 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================================> 
+points: torch.Size([230394, 5])
+frame_id: (2,)
+gt_boxes: torch.Size([2, 42, 8])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([68428, 100, 4])
+voxel_coords: torch.Size([68428, 4])
+voxel_num_points: torch.Size([68428])
+batch_size: 2
+=====================================================>
+points: torch.Size([230394, 5])
+frame_id: (2,)
+gt_boxes: torch.Size([2, 42, 8])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([68428, 100, 4])
+voxel_coords: torch.Size([68428, 4])
+voxel_num_points: torch.Size([68428])
+batch_size: 2
+voxel_features: torch.Size([68428, 4])
+=====================================================>
+points: torch.Size([230394, 5])
+frame_id: (2,)
+gt_boxes: torch.Size([2, 42, 8])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([68428, 100, 4])
+voxel_coords: torch.Size([68428, 4])
+voxel_num_points: torch.Size([68428])
+batch_size: 2
+voxel_features: torch.Size([68428, 4])
+encoded_spconv_tensor: <spconv.SparseConvTensor object at 0x7f4fe055de20>
+encoded_spconv_tensor_stride: 8
+multi_scale_3d_features: {'x_conv1': <spconv.SparseConvTensor object at 0x7f4fe055db20>, 'x_conv2': <spconv.SparseConvTensor object at 0x7f4fe055dac0>, 'x_conv3': <spconv.SparseConvTensor object at 0x7f4fe055dc70>, 'x_conv4': <spconv.SparseConvTensor object at 0x7f4fe055dd30>}
+multi_scale_3d_strides: {'x_conv1': 1, 'x_conv2': 2, 'x_conv3': 4, 'x_conv4': 8}
+=====================================================>
+points: torch.Size([230394, 5])
+frame_id: (2,)
+gt_boxes: torch.Size([2, 42, 8])
+use_lead_xyz: torch.Size([2])
+voxels: torch.Size([68428, 100, 4])
+voxel_coords: torch.Size([68428, 4])
+voxel_num_points: torch.Size([68428])
+batch_size: 2
+voxel_features: torch.Size([68428, 4])
+encoded_spconv_tensor: <spconv.SparseConvTensor object at 0x7f4fe055de20>
+encoded_spconv_tensor_stride: 8
+multi_scale_3d_features: {'x_conv1': <spconv.SparseConvTensor object at 0x7f4fe055db20>, 'x_conv2': <spconv.SparseConvTensor object at 0x7f4fe055dac0>, 'x_conv3': <spconv.SparseConvTensor object at 0x7f4fe055dc70>, 'x_conv4': <spconv.SparseConvTensor object at 0x7f4fe055dd30>}
+multi_scale_3d_strides: {'x_conv1': 1, 'x_conv2': 2, 'x_conv3': 4, 'x_conv4': 8}
+spatial_features: torch.Size([2, 512, 70, 72])
+spatial_features_stride: 8
+
+
+
+
+
+
+
+Traceback (most recent call last):                                      | 63/1700 [01:49<39:23,  1.44s/it, total_it=63]
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 233, in <module>
+    main()
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 177, in main
+    train_model(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 91, in train_model
+    accumulated_iter = train_one_epoch(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 43, in train_one_epoch
+    loss, tb_dict, disp_dict = model_func(model, batch)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/__init__.py", line 42, in model_func
+    ret_dict, tb_dict, disp_dict = model(batch_dict)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/detectors/pdv.py", line 27, in forward
+    batch_dict = cur_module(batch_dict)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/roi_heads/pdv_head.py", line 254, in forward
+    attention_output = self.attention_head(pooled_features, positional_input, src_key_padding_mask) # (BxN, 6x6x6, C)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/model_utils/attention_utils.py", line 44, in forward
+    attended_features[~empty_rois_mask] = self.transformer_encoder(attended_features_filtered,
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/transformer.py", line 181, in forward
+    output = mod(output, src_mask=mask, src_key_padding_mask=src_key_padding_mask)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/transformer.py", line 293, in forward
+    src2 = self.self_attn(src, src, src, attn_mask=src_mask,
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/activation.py", line 978, in forward
+    return F.multi_head_attention_forward(
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/functional.py", line 4265, in multi_head_attention_forward
+    k = k.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
+RuntimeError: cannot reshape tensor of 0 elements into shape [-1, 0, 128] because the unspecified dimension size -1 can be any value and is ambiguous
+
+
+
+
+
+
+
+
+
+Traceback (most recent call last):
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 233, in <module>
+    main()
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 177, in main
+    train_model(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 91, in train_model
+    accumulated_iter = train_one_epoch(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 43, in train_one_epoch
+    loss, tb_dict, disp_dict = model_func(model, batch)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/__init__.py", line 42, in model_func
+    ret_dict, tb_dict, disp_dict = model(batch_dict)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/detectors/pdv.py", line 36, in forward
+    loss, tb_dict, disp_dict = self.get_training_loss()
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/detectors/pdv.py", line 49, in get_training_loss
+    loss_rcnn, tb_dict = self.roi_head.get_loss(tb_dict)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/roi_heads/roi_head_template.py", line 226, in get_loss
+    rcnn_loss_cls, cls_tb_dict = self.get_box_cls_layer_loss(self.forward_ret_dict)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/roi_heads/roi_head_template.py", line 220, in get_box_cls_layer_loss
+    tb_dict = {'rcnn_loss_cls': rcnn_loss_cls.item()}
+RuntimeError: CUDA error: device-side assert triggered
+
+
+
+
+Traceback (most recent call last):
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 233, in <module>
+    main()
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_wanji.py", line 177, in main
+    train_model(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 91, in train_model
+    accumulated_iter = train_one_epoch(
+  File "/media/disk/02drive/05yueye/code/PDV/tools/train_utils/train_utils.py", line 43, in train_one_epoch
+    loss, tb_dict, disp_dict = model_func(model, batch)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/__init__.py", line 42, in model_func
+    ret_dict, tb_dict, disp_dict = model(batch_dict)
+  File "/media/disk/02drive/05yueye/anaconda3/envs/pdv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/detectors/pdv.py", line 36, in forward
+    loss, tb_dict, disp_dict = self.get_training_loss()
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/detectors/pdv.py", line 49, in get_training_loss
+    loss_rcnn, tb_dict = self.roi_head.get_loss(tb_dict)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/roi_heads/roi_head_template.py", line 226, in get_loss
+    rcnn_loss_cls, cls_tb_dict = self.get_box_cls_layer_loss(self.forward_ret_dict)
+  File "/media/disk/02drive/05yueye/code/PDV/pcdet/models/roi_heads/roi_head_template.py", line 220, in get_box_cls_layer_loss
+    tb_dict = {'rcnn_loss_cls': rcnn_loss_cls.item()}
+RuntimeError: CUDA error: device-side assert triggered
+
+
+
+{'pred_boxes': tensor([ [ 19.5410, -41.2759,  -3.2735,   1.8341,   0.7182,   1.6929,   1.6878],
+                        [-33.0337, -19.0032,  -3.3915,   4.7380,   1.8684,   1.7428,   6.2125],
+                        [  8.5352,  29.9874,  -3.8905,   4.5740,   1.8973,   1.6264,   4.5597],
+                        [ 28.8583, -16.6247,  -3.7126,   4.7659,   2.0245,   1.6362,   3.1292],
+                        [ 30.0449, -22.6536,  -3.6283,   4.7661,   1.9681,   1.6390,   3.0820],
+                        [ 28.9487, -19.6083,  -3.6683,   4.6409,   2.0074,   1.6135,   3.1318],
+                        [ 41.4667, -14.1744,  -3.8537,   4.6580,   1.8680,   1.6450,   3.1322],
+                        [-18.4131, -20.2696,  -3.3445,   4.7192,   1.8481,   1.6753,   6.2765],
+                        [ 41.2604, -32.1378,  -3.6526,   4.8660,   1.9800,   1.6380,   6.2130],
+                        [-16.8493, -23.7719,  -3.3494,   4.8728,   1.9437,   1.7365,   6.2582],
+                        [-24.2226, -26.2218,  -3.4263,   4.7124,   1.9047,   1.8106,   6.2692],
+                        [-33.6617, -22.3387,  -3.2877,   4.5527,   1.8648,   1.8188,   6.2647],
+                        [ 12.6629,  -6.8329,  -3.7821,   2.0894,   0.9259,   1.5948,   2.8362],
+                        [ 48.2315, -14.7985,  -3.8840,   4.4418,   1.8007,   1.6394,   3.1219],
+                        [ -0.7231,  -2.9176,  -3.7259,   1.9771,   0.9401,   1.6460,   3.6515],
+                        [ 54.9148, -15.3457,  -3.9670,   4.5432,   1.7952,   1.6411,   3.1212],
+                        [-17.8738, -27.3538,  -3.3212,   4.5926,   1.8456,   1.6224,   6.2672],
+                        [ 37.2216, -20.1320,  -3.7786,   4.5995,   1.9053,   1.6259,   3.1196],
+                        [-14.3859, -30.8288,  -3.3381,   4.8413,   1.9103,   1.7073,   6.2448],
+                        [-26.0805, -19.9099,  -3.3311,   4.7942,   1.9077,   1.7560,   6.2375],
+                        [-49.0657, -20.9781,  -2.8732,   4.5520,   1.8605,   1.7652,   6.2546],
+                        [-52.0479, -28.0262,  -3.2847,   4.4425,   1.7616,   1.7913,   6.2210],
+                        [-25.2707, -37.0635,  -3.2896,   1.8772,   0.9050,   1.7603,   6.1788],
+                        [-30.9159, -29.2176,  -2.5419,  12.3200,   2.9492,   3.6587,   6.2434],
+                        [ 52.4876, -20.8795,  -3.7685,   4.4442,   1.7944,   1.6415,   3.1304],
+                        [ 60.4799, -22.5846,  -3.8271,   4.5314,   1.8095,   1.6355,   3.1218],
+                        [-56.7734, -20.5858,  -2.7483,   4.6521,   1.8922,   1.9109,   6.2958],
+                        [ 32.5599, -13.9954,  -3.8226,   4.5092,   1.8978,   1.6401,   3.0895],
+                        [  7.1725,  45.8518,  -3.8769,   1.8415,   0.9024,   1.6466,   4.6074],
+                        [ -0.9181,  -9.9909,  -3.5945,   2.1588,   0.9147,   1.6141,   3.0099],
+                        [ 36.2433, -23.2370,  -3.6508,   4.5083,   1.8720,   1.6261,   3.0840],
+                        [-25.5986, -23.0842,  -3.3621,   4.4366,   1.8061,   1.6390,   6.2727],
+                        [-45.2270, -28.0345,  -3.3782,   4.4327,   1.8254,   1.7561,   6.0492]],device='cuda:0'), 
+
+  'pred_scores': tensor( [1.0000, 1.0000, 0.9999, 0.9999, 0.9999, 0.9999, 0.9998, 0.9982, 0.9947,
+                          0.9880, 0.9880, 0.9868, 0.9847, 0.9809, 0.9717, 0.9612, 0.9588, 0.9562,
+                          0.9086, 0.9059, 0.8930, 0.8820, 0.8165, 0.8117, 0.8094, 0.7750, 0.7237,
+                          0.7210, 0.6476, 0.6276, 0.4964, 0.3896, 0.3184], device='cuda:0'), 
+                          
+  'pred_labels': tensor(  [3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 2, 2, 2, 3, 3, 2, 2, 2], device='cuda:0')}
