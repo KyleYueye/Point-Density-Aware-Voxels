@@ -1,0 +1,1507 @@
+2022-05-19 16:59:09,173   INFO  **********************Start logging**********************
+2022-05-19 16:59:09,173   INFO  CUDA_VISIBLE_DEVICES=3
+2022-05-19 16:59:09,174   INFO  cfg_file         cfgs/wanji_models/pdv.yaml
+2022-05-19 16:59:09,174   INFO  batch_size       8
+2022-05-19 16:59:09,174   INFO  workers          8
+2022-05-19 16:59:09,174   INFO  extra_tag        default
+2022-05-19 16:59:09,174   INFO  ckpt             None
+2022-05-19 16:59:09,174   INFO  launcher         none
+2022-05-19 16:59:09,174   INFO  tcp_port         18888
+2022-05-19 16:59:09,174   INFO  local_rank       0
+2022-05-19 16:59:09,174   INFO  set_cfgs         None
+2022-05-19 16:59:09,174   INFO  max_waiting_mins 30
+2022-05-19 16:59:09,174   INFO  start_epoch      0
+2022-05-19 16:59:09,174   INFO  eval_tag         default
+2022-05-19 16:59:09,174   INFO  eval_all         True
+2022-05-19 16:59:09,174   INFO  ckpt_dir         ../output/wanji_models/pdv/default/ckpt
+2022-05-19 16:59:09,174   INFO  save_to_file     False
+2022-05-19 16:59:09,175   INFO  disable_wandb    False
+2022-05-19 16:59:09,175   INFO  eval_levels_file None
+2022-05-19 16:59:09,175   INFO  pickle_file      None
+2022-05-19 16:59:09,175   INFO  discard_results  False
+2022-05-19 16:59:09,175   INFO  time_profile     False
+2022-05-19 16:59:09,175   INFO  time_profile_iterations 100
+2022-05-19 16:59:09,175   INFO  cfg.ROOT_DIR: /media/disk/02drive/05yueye/code/PDV
+2022-05-19 16:59:09,175   INFO  cfg.LOCAL_RANK: 0
+2022-05-19 16:59:09,175   INFO  cfg.CLASS_NAMES: ['bus', 'car', 'bicycle', 'pedestrian']
+2022-05-19 16:59:09,175   INFO  
+cfg.WANDB = edict()
+2022-05-19 16:59:09,175   INFO  cfg.WANDB.ENABLED: True
+2022-05-19 16:59:09,175   INFO  cfg.WANDB.PROJECT: density_wanji
+2022-05-19 16:59:09,175   INFO  cfg.WANDB.ENTITY: trailab
+2022-05-19 16:59:09,175   INFO  cfg.WANDB.SUMMARY_HIGHEST_METRIC: Car_3d/moderate_R40
+2022-05-19 16:59:09,175   INFO  
+cfg.DATA_CONFIG = edict()
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.DATASET: WanjiDataset
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.DATA_PATH: /media/disk/02drive/data/20211215161104
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-138, -145, -5, 150, 135, 2.5]
+2022-05-19 16:59:09,176   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: test
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.GET_ITEM_LIST: ['points']
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: False
+2022-05-19 16:59:09,176   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.5, 0.5, 0.1], 'MAX_POINTS_PER_VOXEL': 100, 'MAX_NUMBER_OF_VOXELS': {'train': 1000000, 'test': 1000000}}]
+2022-05-19 16:59:09,176   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/wanji_dataset.yaml
+2022-05-19 16:59:09,177   INFO  
+cfg.MODEL = edict()
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.NAME: PDV
+2022-05-19 16:59:09,177   INFO  
+cfg.MODEL.VFE = edict()
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.VFE.NAME: MeanVFE
+2022-05-19 16:59:09,177   INFO  
+cfg.MODEL.BACKBONE_3D = edict()
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.BACKBONE_3D.NAME: VoxelBackBone8x
+2022-05-19 16:59:09,177   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.MAP_TO_BEV.NAME: HeightCompression
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 512
+2022-05-19 16:59:09,177   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [5, 5]
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2]
+2022-05-19 16:59:09,177   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [128, 256]
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2]
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [256, 256]
+2022-05-19 16:59:09,178   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'bus', 'anchor_sizes': [[9.644, 2.891, 3.32]], 'anchor_rotations': [0, 4.92], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.5, 'unmatched_threshold': 0.3}, {'class_name': 'car', 'anchor_sizes': [[4.704, 1.893, 1.686]], 'anchor_rotations': [0, 4.53], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.6, 'unmatched_threshold': 0.3}, {'class_name': 'bicycle', 'anchor_sizes': [[1.95, 0.859, 1.667]], 'anchor_rotations': [0, 3.3], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.5, 'unmatched_threshold': 0.3}, {'class_name': 'pedestrian', 'anchor_sizes': [[1.399, 0.846, 1.667]], 'anchor_rotations': [0, 0.84], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.3, 'unmatched_threshold': 0.2}]
+2022-05-19 16:59:09,178   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2022-05-19 16:59:09,178   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2022-05-19 16:59:09,179   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2022-05-19 16:59:09,179   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2022-05-19 16:59:09,179   INFO  
+cfg.MODEL.ROI_HEAD = edict()
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.ROI_HEAD.NAME: PDVHead
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.ROI_HEAD.CLASS_AGNOSTIC: True
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.ROI_HEAD.SHARED_FC: [256, 256]
+2022-05-19 16:59:09,179   INFO  cfg.MODEL.ROI_HEAD.CLS_FC: [256, 256]
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.REG_FC: [256, 256]
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.DP_RATIO: 0.3
+2022-05-19 16:59:09,180   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG = edict()
+2022-05-19 16:59:09,180   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN = edict()
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_TYPE: nms_gpu
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.MULTI_CLASSES_NMS: False
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_PRE_MAXSIZE: 9000
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_POST_MAXSIZE: 512
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_THRESH: 0.8
+2022-05-19 16:59:09,180   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST = edict()
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_TYPE: nms_gpu
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.MULTI_CLASSES_NMS: False
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_PRE_MAXSIZE: 1024
+2022-05-19 16:59:09,180   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_POST_MAXSIZE: 100
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_THRESH: 0.7
+2022-05-19 16:59:09,181   INFO  
+cfg.MODEL.ROI_HEAD.VOXEL_AGGREGATION = edict()
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.VOXEL_AGGREGATION.NUM_FEATURES: [64, 64]
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.VOXEL_AGGREGATION.FEATURE_LOCATIONS: ['x_conv3', 'x_conv4']
+2022-05-19 16:59:09,181   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL = edict()
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.FEATURE_LOCATIONS: ['x_conv3', 'x_conv4']
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.GRID_SIZE: 6
+2022-05-19 16:59:09,181   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS = edict()
+2022-05-19 16:59:09,181   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3 = edict()
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.MLPS: [[32, 32], [32, 32]]
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.POOL_RADIUS: [0.4, 0.8]
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.NSAMPLE: [16, 16]
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.POOL_METHOD: max_pool
+2022-05-19 16:59:09,181   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.USE_DENSITY: True
+2022-05-19 16:59:09,182   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4 = edict()
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.MLPS: [[32, 32], [32, 32]]
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.POOL_RADIUS: [0.8, 1.6]
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.NSAMPLE: [16, 16]
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.POOL_METHOD: max_pool
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.USE_DENSITY: True
+2022-05-19 16:59:09,182   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION = edict()
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.ENABLED: True
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.NUM_FEATURES: 128
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.NUM_HEADS: 1
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.NUM_HIDDEN_FEATURES: 128
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.NUM_LAYERS: 1
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.POSITIONAL_ENCODER: density_grid_points
+2022-05-19 16:59:09,182   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.MAX_NUM_BOXES: 20
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.DROPOUT: 0.1
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.COMBINE: True
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.ATTENTION.MASK_EMPTY_POINTS: False
+2022-05-19 16:59:09,183   INFO  
+cfg.MODEL.ROI_HEAD.DENSITY_CONFIDENCE = edict()
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.DENSITY_CONFIDENCE.ENABLED: True
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.DENSITY_CONFIDENCE.GRID_SIZE: 1
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.DENSITY_CONFIDENCE.MAX_NUM_BOXES: 20
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.DENSITY_CONFIDENCE.ADD_SHARED_FEATURES: True
+2022-05-19 16:59:09,183   INFO  
+cfg.MODEL.ROI_HEAD.TARGET_CONFIG = edict()
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.BOX_CODER: ResidualCoder
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.ROI_PER_IMAGE: 128
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.FG_RATIO: 0.5
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.SAMPLE_ROI_BY_EACH_CLASS: True
+2022-05-19 16:59:09,183   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_SCORE_TYPE: roi_iou
+2022-05-19 16:59:09,184   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_FG_THRESH: 0.75
+2022-05-19 16:59:09,198   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_BG_THRESH: 0.25
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_BG_THRESH_LO: 0.1
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.HARD_BG_RATIO: 0.8
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.REG_FG_THRESH: 0.55
+2022-05-19 16:59:09,199   INFO  
+cfg.MODEL.ROI_HEAD.LOSS_CONFIG = edict()
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.CLS_LOSS: BinaryCrossEntropy
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.REG_LOSS: smooth-l1
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.CORNER_LOSS_REGULARIZATION: True
+2022-05-19 16:59:09,199   INFO  
+cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_cls_weight: 1.0
+2022-05-19 16:59:09,199   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_reg_weight: 1.0
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_corner_weight: 1.0
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2022-05-19 16:59:09,200   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.25, 0.5, 0.7, 0.9]
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.3
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: wanji
+2022-05-19 16:59:09,200   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2022-05-19 16:59:09,200   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.1
+2022-05-19 16:59:09,201   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2022-05-19 16:59:09,201   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2022-05-19 16:59:09,201   INFO  
+cfg.OPTIMIZATION = edict()
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 2
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.LR: 0.01
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2022-05-19 16:59:09,201   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2022-05-19 16:59:09,202   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2022-05-19 16:59:09,202   INFO  cfg.TAG: pdv
+2022-05-19 16:59:09,202   INFO  cfg.EXP_GROUP_PATH: wanji_models
+2022-05-19 16:59:20,876   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_17.pth to GPU
+2022-05-19 16:59:22,601   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 16:59:23,121   INFO  ==> Done (loaded 272/272)
+2022-05-19 16:59:23,167   INFO  *************** EPOCH 17 EVALUATION *****************
+2022-05-19 17:05:35,654   INFO  *************** Performance of EPOCH 17 *****************
+2022-05-19 17:05:35,666   INFO  Generate label finished(sec_per_example: 0.4461 second).
+2022-05-19 17:05:35,666   INFO  recall_roi_0.25: 0.277851
+2022-05-19 17:05:35,666   INFO  recall_rcnn_0.25: 0.270505
+2022-05-19 17:05:35,666   INFO  recall_roi_0.5: 0.120306
+2022-05-19 17:05:35,666   INFO  recall_rcnn_0.5: 0.105380
+2022-05-19 17:05:35,666   INFO  recall_roi_0.7: 0.041670
+2022-05-19 17:05:35,666   INFO  recall_rcnn_0.7: 0.019902
+2022-05-19 17:05:35,666   INFO  recall_roi_0.9: 0.002604
+2022-05-19 17:05:35,666   INFO  recall_rcnn_0.9: 0.000350
+2022-05-19 17:05:35,667   INFO  Average predicted number of objects(835 samples): 28.939
+2022-05-19 17:05:53,756   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:53.2697,     53.4602
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:53.6511,     56.3363
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.3595,     88.5841
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.0330,     91.6097
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:19.7868,     12.6150
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.0371,     26.6994
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:05:53,757   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_17/test
+2022-05-19 17:05:53,757   INFO  ****************Evaluation done.*****************
+2022-05-19 17:05:53,834   INFO  Epoch 17 has been evaluated
+2022-05-19 17:05:53,848   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_18.pth to GPU
+2022-05-19 17:05:55,796   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:05:56,260   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:05:56,314   INFO  *************** EPOCH 18 EVALUATION *****************
+2022-05-19 17:11:49,742   INFO  *************** Performance of EPOCH 18 *****************
+2022-05-19 17:11:49,773   INFO  Generate label finished(sec_per_example: 0.4233 second).
+2022-05-19 17:11:49,773   INFO  recall_roi_0.25: 0.263858
+2022-05-19 17:11:49,773   INFO  recall_rcnn_0.25: 0.265762
+2022-05-19 17:11:49,773   INFO  recall_roi_0.5: 0.114631
+2022-05-19 17:11:49,773   INFO  recall_rcnn_0.5: 0.103942
+2022-05-19 17:11:49,773   INFO  recall_roi_0.7: 0.029736
+2022-05-19 17:11:49,773   INFO  recall_rcnn_0.7: 0.019125
+2022-05-19 17:11:49,773   INFO  recall_roi_0.9: 0.000000
+2022-05-19 17:11:49,773   INFO  recall_rcnn_0.9: 0.000155
+2022-05-19 17:11:49,775   INFO  Average predicted number of objects(835 samples): 28.432
+2022-05-19 17:11:55,711   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:70.9546,     70.7190
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.6097,     71.3381
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.6422,     85.9509
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:89.9334,     89.0695
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:14.5096,     9.0703
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:24.2915,     18.8708
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:11:55,711   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_18/test
+2022-05-19 17:11:55,712   INFO  ****************Evaluation done.*****************
+2022-05-19 17:11:55,783   INFO  Epoch 18 has been evaluated
+2022-05-19 17:11:55,804   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_19.pth to GPU
+2022-05-19 17:11:57,790   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:11:58,240   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:11:58,288   INFO  *************** EPOCH 19 EVALUATION *****************
+2022-05-19 17:17:51,631   INFO  *************** Performance of EPOCH 19 *****************
+2022-05-19 17:17:51,654   INFO  Generate label finished(sec_per_example: 0.4232 second).
+2022-05-19 17:17:51,654   INFO  recall_roi_0.25: 0.255345
+2022-05-19 17:17:51,654   INFO  recall_rcnn_0.25: 0.259038
+2022-05-19 17:17:51,654   INFO  recall_roi_0.5: 0.104486
+2022-05-19 17:17:51,654   INFO  recall_rcnn_0.5: 0.092125
+2022-05-19 17:17:51,655   INFO  recall_roi_0.7: 0.027637
+2022-05-19 17:17:51,655   INFO  recall_rcnn_0.7: 0.018930
+2022-05-19 17:17:51,655   INFO  recall_roi_0.9: 0.000155
+2022-05-19 17:17:51,655   INFO  recall_rcnn_0.9: 0.000039
+2022-05-19 17:17:51,656   INFO  Average predicted number of objects(835 samples): 27.984
+2022-05-19 17:17:57,545   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.1714,     68.6052
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.8130,     71.5059
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.6537,     83.6182
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.0984,     86.5642
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.3593,     14.4370
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.8987,     27.3795
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:17:57,545   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_19/test
+2022-05-19 17:17:57,546   INFO  ****************Evaluation done.*****************
+2022-05-19 17:17:57,621   INFO  Epoch 19 has been evaluated
+2022-05-19 17:17:57,625   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_20.pth to GPU
+2022-05-19 17:17:59,402   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:17:59,860   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:17:59,902   INFO  *************** EPOCH 20 EVALUATION *****************
+2022-05-19 17:23:46,155   INFO  *************** Performance of EPOCH 20 *****************
+2022-05-19 17:23:46,170   INFO  Generate label finished(sec_per_example: 0.4147 second).
+2022-05-19 17:23:46,170   INFO  recall_roi_0.25: 0.279911
+2022-05-19 17:23:46,170   INFO  recall_rcnn_0.25: 0.279756
+2022-05-19 17:23:46,171   INFO  recall_roi_0.5: 0.118790
+2022-05-19 17:23:46,171   INFO  recall_rcnn_0.5: 0.104680
+2022-05-19 17:23:46,171   INFO  recall_roi_0.7: 0.030281
+2022-05-19 17:23:46,171   INFO  recall_rcnn_0.7: 0.023167
+2022-05-19 17:23:46,171   INFO  recall_roi_0.9: 0.000972
+2022-05-19 17:23:46,171   INFO  recall_rcnn_0.9: 0.000233
+2022-05-19 17:23:46,172   INFO  Average predicted number of objects(835 samples): 28.272
+2022-05-19 17:23:52,176   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:70.9748,     68.2468
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.3335,     68.5765
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.3870,     88.5049
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.2694,     89.4172
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:14.8426,     10.7709
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:26.3580,     26.1388
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:23:52,177   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_20/test
+2022-05-19 17:23:52,177   INFO  ****************Evaluation done.*****************
+2022-05-19 17:23:52,256   INFO  Epoch 20 has been evaluated
+2022-05-19 17:23:52,289   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_21.pth to GPU
+2022-05-19 17:23:54,135   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:23:54,608   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:23:54,661   INFO  *************** EPOCH 21 EVALUATION *****************
+2022-05-19 17:29:46,669   INFO  *************** Performance of EPOCH 21 *****************
+2022-05-19 17:29:46,686   INFO  Generate label finished(sec_per_example: 0.4216 second).
+2022-05-19 17:29:46,686   INFO  recall_roi_0.25: 0.266034
+2022-05-19 17:29:46,686   INFO  recall_rcnn_0.25: 0.261642
+2022-05-19 17:29:46,686   INFO  recall_roi_0.5: 0.092552
+2022-05-19 17:29:46,686   INFO  recall_rcnn_0.5: 0.082718
+2022-05-19 17:29:46,686   INFO  recall_roi_0.7: 0.020563
+2022-05-19 17:29:46,686   INFO  recall_rcnn_0.7: 0.018075
+2022-05-19 17:29:46,687   INFO  recall_roi_0.9: 0.000039
+2022-05-19 17:29:46,687   INFO  recall_rcnn_0.9: 0.000039
+2022-05-19 17:29:46,688   INFO  Average predicted number of objects(835 samples): 29.168
+2022-05-19 17:29:52,576   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:62.6018,     66.1808
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.5135,     68.8411
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.6866,     85.9603
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:89.7476,     88.9641
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:20.3836,     14.3207
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.3283,     30.3500
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:29:52,576   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_21/test
+2022-05-19 17:29:52,576   INFO  ****************Evaluation done.*****************
+2022-05-19 17:29:52,661   INFO  Epoch 21 has been evaluated
+2022-05-19 17:29:52,682   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_22.pth to GPU
+2022-05-19 17:29:54,651   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:29:55,246   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:29:55,299   INFO  *************** EPOCH 22 EVALUATION *****************
+2022-05-19 17:35:37,676   INFO  *************** Performance of EPOCH 22 *****************
+2022-05-19 17:35:37,676   INFO  Generate label finished(sec_per_example: 0.4100 second).
+2022-05-19 17:35:37,676   INFO  recall_roi_0.25: 0.264324
+2022-05-19 17:35:37,676   INFO  recall_rcnn_0.25: 0.259349
+2022-05-19 17:35:37,676   INFO  recall_roi_0.5: 0.109150
+2022-05-19 17:35:37,677   INFO  recall_rcnn_0.5: 0.097878
+2022-05-19 17:35:37,677   INFO  recall_roi_0.7: 0.023711
+2022-05-19 17:35:37,677   INFO  recall_rcnn_0.7: 0.020563
+2022-05-19 17:35:37,677   INFO  recall_roi_0.9: 0.000155
+2022-05-19 17:35:37,677   INFO  recall_rcnn_0.9: 0.000350
+2022-05-19 17:35:37,678   INFO  Average predicted number of objects(835 samples): 27.414
+2022-05-19 17:35:43,612   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:63.1232,     64.3496
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:63.2015,     64.4610
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.9211,     86.3285
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3112,     89.4197
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.2300,     15.2231
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:25.7007,     23.2056
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:35:43,613   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_22/test
+2022-05-19 17:35:43,613   INFO  ****************Evaluation done.*****************
+2022-05-19 17:35:43,677   INFO  Epoch 22 has been evaluated
+2022-05-19 17:35:43,684   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_23.pth to GPU
+2022-05-19 17:35:45,356   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:35:45,819   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:35:45,824   INFO  *************** EPOCH 23 EVALUATION *****************
+2022-05-19 17:41:28,638   INFO  *************** Performance of EPOCH 23 *****************
+2022-05-19 17:41:28,639   INFO  Generate label finished(sec_per_example: 0.4106 second).
+2022-05-19 17:41:28,639   INFO  recall_roi_0.25: 0.257211
+2022-05-19 17:41:28,639   INFO  recall_rcnn_0.25: 0.255189
+2022-05-19 17:41:28,639   INFO  recall_roi_0.5: 0.122600
+2022-05-19 17:41:28,639   INFO  recall_rcnn_0.5: 0.096245
+2022-05-19 17:41:28,639   INFO  recall_roi_0.7: 0.037239
+2022-05-19 17:41:28,640   INFO  recall_rcnn_0.7: 0.022740
+2022-05-19 17:41:28,640   INFO  recall_roi_0.9: 0.000505
+2022-05-19 17:41:28,640   INFO  recall_rcnn_0.9: 0.000155
+2022-05-19 17:41:28,642   INFO  Average predicted number of objects(835 samples): 28.477
+2022-05-19 17:41:34,299   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:62.3759,     65.8437
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:62.6003,     66.1939
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.6420,     88.8257
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.1503,     89.3154
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:20.9361,     13.5867
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:25.8615,     25.1935
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:41:34,299   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_23/test
+2022-05-19 17:41:34,299   INFO  ****************Evaluation done.*****************
+2022-05-19 17:41:34,350   INFO  Epoch 23 has been evaluated
+2022-05-19 17:41:34,351   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_24.pth to GPU
+2022-05-19 17:41:35,994   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:41:36,448   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:41:36,452   INFO  *************** EPOCH 24 EVALUATION *****************
+2022-05-19 17:47:26,321   INFO  *************** Performance of EPOCH 24 *****************
+2022-05-19 17:47:26,321   INFO  Generate label finished(sec_per_example: 0.4190 second).
+2022-05-19 17:47:26,322   INFO  recall_roi_0.25: 0.253751
+2022-05-19 17:47:26,322   INFO  recall_rcnn_0.25: 0.253479
+2022-05-19 17:47:26,322   INFO  recall_roi_0.5: 0.094029
+2022-05-19 17:47:26,322   INFO  recall_rcnn_0.5: 0.095429
+2022-05-19 17:47:26,322   INFO  recall_roi_0.7: 0.026782
+2022-05-19 17:47:26,322   INFO  recall_rcnn_0.7: 0.020058
+2022-05-19 17:47:26,323   INFO  recall_roi_0.9: 0.002138
+2022-05-19 17:47:26,323   INFO  recall_rcnn_0.9: 0.000739
+2022-05-19 17:47:26,325   INFO  Average predicted number of objects(835 samples): 27.085
+2022-05-19 17:47:31,975   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.9448,     69.3049
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.1086,     69.4323
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0340,     84.0583
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.5113,     87.0807
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:15.0078,     11.5383
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:25.3941,     22.7267
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:47:31,975   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_24/test
+2022-05-19 17:47:31,975   INFO  ****************Evaluation done.*****************
+2022-05-19 17:47:32,044   INFO  Epoch 24 has been evaluated
+2022-05-19 17:47:32,051   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_25.pth to GPU
+2022-05-19 17:47:33,675   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:47:34,238   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:47:34,244   INFO  *************** EPOCH 25 EVALUATION *****************
+2022-05-19 17:53:19,075   INFO  *************** Performance of EPOCH 25 *****************
+2022-05-19 17:53:19,076   INFO  Generate label finished(sec_per_example: 0.4130 second).
+2022-05-19 17:53:19,076   INFO  recall_roi_0.25: 0.258454
+2022-05-19 17:53:19,076   INFO  recall_rcnn_0.25: 0.258649
+2022-05-19 17:53:19,076   INFO  recall_roi_0.5: 0.087266
+2022-05-19 17:53:19,076   INFO  recall_rcnn_0.5: 0.088860
+2022-05-19 17:53:19,076   INFO  recall_roi_0.7: 0.020368
+2022-05-19 17:53:19,076   INFO  recall_rcnn_0.7: 0.019785
+2022-05-19 17:53:19,076   INFO  recall_roi_0.9: 0.000272
+2022-05-19 17:53:19,076   INFO  recall_rcnn_0.9: 0.000155
+2022-05-19 17:53:19,078   INFO  Average predicted number of objects(835 samples): 28.279
+2022-05-19 17:53:24,800   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:62.8298,     66.4871
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.7973,     69.0928
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.5293,     88.7148
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.1514,     91.7236
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:14.5745,     9.9574
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:25.6713,     20.7051
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:53:24,800   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_25/test
+2022-05-19 17:53:24,801   INFO  ****************Evaluation done.*****************
+2022-05-19 17:53:24,879   INFO  Epoch 25 has been evaluated
+2022-05-19 17:53:24,880   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_26.pth to GPU
+2022-05-19 17:53:26,544   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:53:26,999   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:53:27,003   INFO  *************** EPOCH 26 EVALUATION *****************
+2022-05-19 17:59:17,889   INFO  *************** Performance of EPOCH 26 *****************
+2022-05-19 17:59:17,929   INFO  Generate label finished(sec_per_example: 0.4203 second).
+2022-05-19 17:59:17,929   INFO  recall_roi_0.25: 0.260359
+2022-05-19 17:59:17,929   INFO  recall_rcnn_0.25: 0.253907
+2022-05-19 17:59:17,929   INFO  recall_roi_0.5: 0.107129
+2022-05-19 17:59:17,929   INFO  recall_rcnn_0.5: 0.104330
+2022-05-19 17:59:17,930   INFO  recall_roi_0.7: 0.029775
+2022-05-19 17:59:17,930   INFO  recall_rcnn_0.7: 0.023945
+2022-05-19 17:59:17,930   INFO  recall_roi_0.9: 0.000194
+2022-05-19 17:59:17,930   INFO  recall_rcnn_0.9: 0.000389
+2022-05-19 17:59:17,931   INFO  Average predicted number of objects(835 samples): 27.189
+2022-05-19 17:59:23,837   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.6553,     71.4081
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.9470,     71.6645
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.8288,     83.8268
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.2249,     86.7210
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:16.0122,     13.0637
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:25.1338,     20.1059
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 17:59:23,838   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_26/test
+2022-05-19 17:59:23,838   INFO  ****************Evaluation done.*****************
+2022-05-19 17:59:23,913   INFO  Epoch 26 has been evaluated
+2022-05-19 17:59:23,918   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_27.pth to GPU
+2022-05-19 17:59:25,808   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 17:59:26,274   INFO  ==> Done (loaded 272/272)
+2022-05-19 17:59:26,317   INFO  *************** EPOCH 27 EVALUATION *****************
+2022-05-19 18:05:10,587   INFO  *************** Performance of EPOCH 27 *****************
+2022-05-19 18:05:10,587   INFO  Generate label finished(sec_per_example: 0.4123 second).
+2022-05-19 18:05:10,588   INFO  recall_roi_0.25: 0.253790
+2022-05-19 18:05:10,588   INFO  recall_rcnn_0.25: 0.254801
+2022-05-19 18:05:10,588   INFO  recall_roi_0.5: 0.118052
+2022-05-19 18:05:10,588   INFO  recall_rcnn_0.5: 0.095312
+2022-05-19 18:05:10,588   INFO  recall_roi_0.7: 0.048433
+2022-05-19 18:05:10,588   INFO  recall_rcnn_0.7: 0.024489
+2022-05-19 18:05:10,588   INFO  recall_roi_0.9: 0.001244
+2022-05-19 18:05:10,588   INFO  recall_rcnn_0.9: 0.000039
+2022-05-19 18:05:10,590   INFO  Average predicted number of objects(835 samples): 27.949
+2022-05-19 18:05:16,197   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.6832,     69.0464
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.0121,     69.3117
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.6040,     83.5700
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:80.9796,     86.4413
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.5276,     16.2556
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.0226,     29.7996
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:05:16,197   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_27/test
+2022-05-19 18:05:16,198   INFO  ****************Evaluation done.*****************
+2022-05-19 18:05:16,254   INFO  Epoch 27 has been evaluated
+2022-05-19 18:05:16,255   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_28.pth to GPU
+2022-05-19 18:05:17,925   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:05:18,450   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:05:18,481   INFO  *************** EPOCH 28 EVALUATION *****************
+2022-05-19 18:10:59,949   INFO  *************** Performance of EPOCH 28 *****************
+2022-05-19 18:10:59,950   INFO  Generate label finished(sec_per_example: 0.4089 second).
+2022-05-19 18:10:59,950   INFO  recall_roi_0.25: 0.273653
+2022-05-19 18:10:59,950   INFO  recall_rcnn_0.25: 0.266462
+2022-05-19 18:10:59,950   INFO  recall_roi_0.5: 0.133173
+2022-05-19 18:10:59,951   INFO  recall_rcnn_0.5: 0.104797
+2022-05-19 18:10:59,951   INFO  recall_roi_0.7: 0.040232
+2022-05-19 18:10:59,951   INFO  recall_rcnn_0.7: 0.028570
+2022-05-19 18:10:59,951   INFO  recall_roi_0.9: 0.000311
+2022-05-19 18:10:59,951   INFO  recall_rcnn_0.9: 0.000272
+2022-05-19 18:10:59,953   INFO  Average predicted number of objects(835 samples): 29.310
+2022-05-19 18:11:05,757   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:62.6479,     59.1242
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:62.9802,     61.8195
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:88.9563,     88.1476
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:89.5343,     91.0504
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.1587,     15.6180
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:32.9416,     28.7798
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:11:05,758   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_28/test
+2022-05-19 18:11:05,758   INFO  ****************Evaluation done.*****************
+2022-05-19 18:11:05,795   INFO  Epoch 28 has been evaluated
+2022-05-19 18:11:05,835   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_29.pth to GPU
+2022-05-19 18:11:07,513   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:11:08,010   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:11:08,016   INFO  *************** EPOCH 29 EVALUATION *****************
+2022-05-19 18:16:52,807   INFO  *************** Performance of EPOCH 29 *****************
+2022-05-19 18:16:52,808   INFO  Generate label finished(sec_per_example: 0.4129 second).
+2022-05-19 18:16:52,808   INFO  recall_roi_0.25: 0.272370
+2022-05-19 18:16:52,808   INFO  recall_rcnn_0.25: 0.271399
+2022-05-19 18:16:52,808   INFO  recall_roi_0.5: 0.121783
+2022-05-19 18:16:52,809   INFO  recall_rcnn_0.5: 0.100637
+2022-05-19 18:16:52,809   INFO  recall_roi_0.7: 0.039571
+2022-05-19 18:16:52,809   INFO  recall_rcnn_0.7: 0.026355
+2022-05-19 18:16:52,809   INFO  recall_roi_0.9: 0.002799
+2022-05-19 18:16:52,809   INFO  recall_rcnn_0.9: 0.000428
+2022-05-19 18:16:52,812   INFO  Average predicted number of objects(835 samples): 29.081
+2022-05-19 18:16:58,654   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.9740,     71.7517
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.0932,     74.2335
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0430,     86.3737
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.1659,     91.7436
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.8847,     16.9977
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.1046,     30.0787
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:16:58,654   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_29/test
+2022-05-19 18:16:58,655   INFO  ****************Evaluation done.*****************
+2022-05-19 18:16:58,770   INFO  Epoch 29 has been evaluated
+2022-05-19 18:16:58,771   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_30.pth to GPU
+2022-05-19 18:17:00,464   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:17:01,032   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:17:01,041   INFO  *************** EPOCH 30 EVALUATION *****************
+2022-05-19 18:22:42,711   INFO  *************** Performance of EPOCH 30 *****************
+2022-05-19 18:22:42,712   INFO  Generate label finished(sec_per_example: 0.4092 second).
+2022-05-19 18:22:42,712   INFO  recall_roi_0.25: 0.265685
+2022-05-19 18:22:42,712   INFO  recall_rcnn_0.25: 0.265568
+2022-05-19 18:22:42,712   INFO  recall_roi_0.5: 0.114631
+2022-05-19 18:22:42,713   INFO  recall_rcnn_0.5: 0.088898
+2022-05-19 18:22:42,713   INFO  recall_roi_0.7: 0.040387
+2022-05-19 18:22:42,713   INFO  recall_rcnn_0.7: 0.022779
+2022-05-19 18:22:42,713   INFO  recall_roi_0.9: 0.001399
+2022-05-19 18:22:42,713   INFO  recall_rcnn_0.9: 0.000078
+2022-05-19 18:22:42,716   INFO  Average predicted number of objects(835 samples): 27.949
+2022-05-19 18:22:48,708   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:63.2747,     66.9781
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.1274,     69.4487
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.1567,     86.6248
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.5341,     87.1143
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:20.0963,     14.6779
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.3498,     31.2464
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:22:48,708   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_30/test
+2022-05-19 18:22:48,708   INFO  ****************Evaluation done.*****************
+2022-05-19 18:22:48,755   INFO  Epoch 30 has been evaluated
+2022-05-19 18:22:48,756   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_31.pth to GPU
+2022-05-19 18:22:50,440   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:22:50,900   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:22:50,906   INFO  *************** EPOCH 31 EVALUATION *****************
+2022-05-19 18:28:36,465   INFO  *************** Performance of EPOCH 31 *****************
+2022-05-19 18:28:36,466   INFO  Generate label finished(sec_per_example: 0.4138 second).
+2022-05-19 18:28:36,466   INFO  recall_roi_0.25: 0.251652
+2022-05-19 18:28:36,466   INFO  recall_rcnn_0.25: 0.257560
+2022-05-19 18:28:36,466   INFO  recall_roi_0.5: 0.097372
+2022-05-19 18:28:36,467   INFO  recall_rcnn_0.5: 0.085711
+2022-05-19 18:28:36,467   INFO  recall_roi_0.7: 0.025849
+2022-05-19 18:28:36,467   INFO  recall_rcnn_0.7: 0.017375
+2022-05-19 18:28:36,467   INFO  recall_roi_0.9: 0.000117
+2022-05-19 18:28:36,467   INFO  recall_rcnn_0.9: 0.000000
+2022-05-19 18:28:36,470   INFO  Average predicted number of objects(835 samples): 28.537
+2022-05-19 18:28:42,084   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.8120,     69.1601
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.9109,     69.2295
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.7959,     86.1422
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.0312,     89.1923
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.3824,     18.4484
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.3671,     29.1017
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:28:42,084   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_31/test
+2022-05-19 18:28:42,084   INFO  ****************Evaluation done.*****************
+2022-05-19 18:28:42,157   INFO  Epoch 31 has been evaluated
+2022-05-19 18:28:42,163   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_32.pth to GPU
+2022-05-19 18:28:43,848   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:28:44,304   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:28:44,311   INFO  *************** EPOCH 32 EVALUATION *****************
+2022-05-19 18:34:29,542   INFO  *************** Performance of EPOCH 32 *****************
+2022-05-19 18:34:29,543   INFO  Generate label finished(sec_per_example: 0.4134 second).
+2022-05-19 18:34:29,543   INFO  recall_roi_0.25: 0.254062
+2022-05-19 18:34:29,543   INFO  recall_rcnn_0.25: 0.252391
+2022-05-19 18:34:29,543   INFO  recall_roi_0.5: 0.110627
+2022-05-19 18:34:29,543   INFO  recall_rcnn_0.5: 0.093446
+2022-05-19 18:34:29,544   INFO  recall_roi_0.7: 0.030864
+2022-05-19 18:34:29,544   INFO  recall_rcnn_0.7: 0.016404
+2022-05-19 18:34:29,544   INFO  recall_roi_0.9: 0.000155
+2022-05-19 18:34:29,544   INFO  recall_rcnn_0.9: 0.000194
+2022-05-19 18:34:29,547   INFO  Average predicted number of objects(835 samples): 29.132
+2022-05-19 18:34:35,610   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.7517,     69.1698
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.0176,     71.7819
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.4655,     88.6726
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.0055,     89.1881
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.3733,     18.5099
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.7375,     33.0540
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:34:35,610   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_32/test
+2022-05-19 18:34:35,610   INFO  ****************Evaluation done.*****************
+2022-05-19 18:34:35,662   INFO  Epoch 32 has been evaluated
+2022-05-19 18:34:35,668   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_33.pth to GPU
+2022-05-19 18:34:37,325   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:34:37,789   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:34:37,793   INFO  *************** EPOCH 33 EVALUATION *****************
+2022-05-19 18:40:20,974   INFO  *************** Performance of EPOCH 33 *****************
+2022-05-19 18:40:20,975   INFO  Generate label finished(sec_per_example: 0.4110 second).
+2022-05-19 18:40:20,975   INFO  recall_roi_0.25: 0.251963
+2022-05-19 18:40:20,975   INFO  recall_rcnn_0.25: 0.250525
+2022-05-19 18:40:20,975   INFO  recall_roi_0.5: 0.105069
+2022-05-19 18:40:20,975   INFO  recall_rcnn_0.5: 0.084934
+2022-05-19 18:40:20,975   INFO  recall_roi_0.7: 0.027288
+2022-05-19 18:40:20,976   INFO  recall_rcnn_0.7: 0.019397
+2022-05-19 18:40:20,976   INFO  recall_roi_0.9: 0.000739
+2022-05-19 18:40:20,976   INFO  recall_rcnn_0.9: 0.000194
+2022-05-19 18:40:20,978   INFO  Average predicted number of objects(835 samples): 28.898
+2022-05-19 18:40:26,861   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.1195,     70.8855
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.4051,     71.1198
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.9852,     86.3294
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.0844,     89.2627
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.9758,     18.2923
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.1256,     32.2934
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:40:26,862   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_33/test
+2022-05-19 18:40:26,862   INFO  ****************Evaluation done.*****************
+2022-05-19 18:40:26,900   INFO  Epoch 33 has been evaluated
+2022-05-19 18:40:26,901   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_34.pth to GPU
+2022-05-19 18:40:28,561   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:40:29,128   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:40:29,135   INFO  *************** EPOCH 34 EVALUATION *****************
+2022-05-19 18:46:09,191   INFO  *************** Performance of EPOCH 34 *****************
+2022-05-19 18:46:09,192   INFO  Generate label finished(sec_per_example: 0.4073 second).
+2022-05-19 18:46:09,206   INFO  recall_roi_0.25: 0.249631
+2022-05-19 18:46:09,206   INFO  recall_rcnn_0.25: 0.249708
+2022-05-19 18:46:09,206   INFO  recall_roi_0.5: 0.107051
+2022-05-19 18:46:09,206   INFO  recall_rcnn_0.5: 0.090492
+2022-05-19 18:46:09,206   INFO  recall_roi_0.7: 0.030786
+2022-05-19 18:46:09,206   INFO  recall_rcnn_0.7: 0.025927
+2022-05-19 18:46:09,207   INFO  recall_roi_0.9: 0.000272
+2022-05-19 18:46:09,207   INFO  recall_rcnn_0.9: 0.003498
+2022-05-19 18:46:09,208   INFO  Average predicted number of objects(835 samples): 28.828
+2022-05-19 18:46:16,656   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.3728,     71.1108
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.5175,     71.2434
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.7011,     86.0473
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:89.9637,     89.0867
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.3097,     15.7519
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.4789,     29.3481
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:46:16,656   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_34/test
+2022-05-19 18:46:16,656   INFO  ****************Evaluation done.*****************
+2022-05-19 18:46:16,706   INFO  Epoch 34 has been evaluated
+2022-05-19 18:46:16,707   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_35.pth to GPU
+2022-05-19 18:46:18,378   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:46:18,948   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:46:18,954   INFO  *************** EPOCH 35 EVALUATION *****************
+2022-05-19 18:52:06,156   INFO  *************** Performance of EPOCH 35 *****************
+2022-05-19 18:52:06,157   INFO  Generate label finished(sec_per_example: 0.4158 second).
+2022-05-19 18:52:06,157   INFO  recall_roi_0.25: 0.249747
+2022-05-19 18:52:06,157   INFO  recall_rcnn_0.25: 0.248115
+2022-05-19 18:52:06,157   INFO  recall_roi_0.5: 0.095079
+2022-05-19 18:52:06,158   INFO  recall_rcnn_0.5: 0.084856
+2022-05-19 18:52:06,158   INFO  recall_roi_0.7: 0.026666
+2022-05-19 18:52:06,158   INFO  recall_rcnn_0.7: 0.017609
+2022-05-19 18:52:06,158   INFO  recall_roi_0.9: 0.001244
+2022-05-19 18:52:06,158   INFO  recall_rcnn_0.9: 0.000117
+2022-05-19 18:52:06,160   INFO  Average predicted number of objects(835 samples): 29.240
+2022-05-19 18:52:12,246   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.8160,     71.5660
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.9125,     71.6481
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:89.7336,     88.9187
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.1950,     91.7660
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:21.2106,     16.2162
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.7566,     31.8120
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:52:12,246   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_35/test
+2022-05-19 18:52:12,247   INFO  ****************Evaluation done.*****************
+2022-05-19 18:52:12,301   INFO  Epoch 35 has been evaluated
+2022-05-19 18:52:12,302   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_36.pth to GPU
+2022-05-19 18:52:13,907   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:52:14,355   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:52:14,361   INFO  *************** EPOCH 36 EVALUATION *****************
+2022-05-19 18:57:56,121   INFO  *************** Performance of EPOCH 36 *****************
+2022-05-19 18:57:56,121   INFO  Generate label finished(sec_per_example: 0.4093 second).
+2022-05-19 18:57:56,121   INFO  recall_roi_0.25: 0.249242
+2022-05-19 18:57:56,121   INFO  recall_rcnn_0.25: 0.244344
+2022-05-19 18:57:56,121   INFO  recall_roi_0.5: 0.105147
+2022-05-19 18:57:56,122   INFO  recall_rcnn_0.5: 0.087305
+2022-05-19 18:57:56,122   INFO  recall_roi_0.7: 0.033390
+2022-05-19 18:57:56,122   INFO  recall_rcnn_0.7: 0.019280
+2022-05-19 18:57:56,122   INFO  recall_roi_0.9: 0.000389
+2022-05-19 18:57:56,122   INFO  recall_rcnn_0.9: 0.000544
+2022-05-19 18:57:56,124   INFO  Average predicted number of objects(835 samples): 28.701
+2022-05-19 18:58:02,056   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.8760,     71.6527
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.0112,     71.7485
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.7792,     86.1452
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:89.9487,     89.0757
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.7514,     18.8342
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.9212,     31.9371
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 18:58:02,056   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_36/test
+2022-05-19 18:58:02,056   INFO  ****************Evaluation done.*****************
+2022-05-19 18:58:02,096   INFO  Epoch 36 has been evaluated
+2022-05-19 18:58:02,097   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_37.pth to GPU
+2022-05-19 18:58:03,715   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 18:58:04,277   INFO  ==> Done (loaded 272/272)
+2022-05-19 18:58:04,285   INFO  *************** EPOCH 37 EVALUATION *****************
+2022-05-19 19:03:54,343   INFO  *************** Performance of EPOCH 37 *****************
+2022-05-19 19:03:54,344   INFO  Generate label finished(sec_per_example: 0.4192 second).
+2022-05-19 19:03:54,344   INFO  recall_roi_0.25: 0.249009
+2022-05-19 19:03:54,344   INFO  recall_rcnn_0.25: 0.248465
+2022-05-19 19:03:54,344   INFO  recall_roi_0.5: 0.108839
+2022-05-19 19:03:54,344   INFO  recall_rcnn_0.5: 0.089520
+2022-05-19 19:03:54,345   INFO  recall_roi_0.7: 0.029309
+2022-05-19 19:03:54,345   INFO  recall_rcnn_0.7: 0.020096
+2022-05-19 19:03:54,345   INFO  recall_roi_0.9: 0.000155
+2022-05-19 19:03:54,345   INFO  recall_rcnn_0.9: 0.000233
+2022-05-19 19:03:54,347   INFO  Average predicted number of objects(835 samples): 28.541
+2022-05-19 19:04:00,470   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.0422,     69.4036
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.1225,     69.4539
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.1603,     86.5881
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3075,     89.4626
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.1537,     18.4492
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.6709,     29.4522
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:04:00,471   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_37/test
+2022-05-19 19:04:00,471   INFO  ****************Evaluation done.*****************
+2022-05-19 19:04:00,526   INFO  Epoch 37 has been evaluated
+2022-05-19 19:04:00,532   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_38.pth to GPU
+2022-05-19 19:04:02,138   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:04:02,698   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:04:02,706   INFO  *************** EPOCH 38 EVALUATION *****************
+2022-05-19 19:09:49,942   INFO  *************** Performance of EPOCH 38 *****************
+2022-05-19 19:09:49,942   INFO  Generate label finished(sec_per_example: 0.4159 second).
+2022-05-19 19:09:49,942   INFO  recall_roi_0.25: 0.251885
+2022-05-19 19:09:49,942   INFO  recall_rcnn_0.25: 0.249242
+2022-05-19 19:09:49,943   INFO  recall_roi_0.5: 0.097295
+2022-05-19 19:09:49,943   INFO  recall_rcnn_0.5: 0.090492
+2022-05-19 19:09:49,943   INFO  recall_roi_0.7: 0.029581
+2022-05-19 19:09:49,943   INFO  recall_rcnn_0.7: 0.022195
+2022-05-19 19:09:49,943   INFO  recall_roi_0.9: 0.001011
+2022-05-19 19:09:49,943   INFO  recall_rcnn_0.9: 0.000389
+2022-05-19 19:09:49,946   INFO  Average predicted number of objects(835 samples): 28.990
+2022-05-19 19:09:55,882   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.7952,     69.2677
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.9805,     71.7493
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:80.8454,     86.2147
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.2342,     89.3848
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:23.5637,     21.7309
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.7565,     35.1734
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:09:55,882   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_38/test
+2022-05-19 19:09:55,882   INFO  ****************Evaluation done.*****************
+2022-05-19 19:09:55,922   INFO  Epoch 38 has been evaluated
+2022-05-19 19:09:55,923   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_39.pth to GPU
+2022-05-19 19:09:57,596   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:09:58,157   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:09:58,165   INFO  *************** EPOCH 39 EVALUATION *****************
+2022-05-19 19:15:37,322   INFO  *************** Performance of EPOCH 39 *****************
+2022-05-19 19:15:37,322   INFO  Generate label finished(sec_per_example: 0.4062 second).
+2022-05-19 19:15:37,323   INFO  recall_roi_0.25: 0.257172
+2022-05-19 19:15:37,323   INFO  recall_rcnn_0.25: 0.257716
+2022-05-19 19:15:37,323   INFO  recall_roi_0.5: 0.105380
+2022-05-19 19:15:37,323   INFO  recall_rcnn_0.5: 0.091775
+2022-05-19 19:15:37,323   INFO  recall_roi_0.7: 0.036111
+2022-05-19 19:15:37,323   INFO  recall_rcnn_0.7: 0.018231
+2022-05-19 19:15:37,324   INFO  recall_roi_0.9: 0.000622
+2022-05-19 19:15:37,324   INFO  recall_rcnn_0.9: 0.000117
+2022-05-19 19:15:37,326   INFO  Average predicted number of objects(835 samples): 28.644
+2022-05-19 19:15:43,330   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.9419,     69.3752
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.1907,     71.9790
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0727,     86.4976
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3718,     89.5113
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.0825,     18.3563
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.6772,     31.6515
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:15:43,331   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_39/test
+2022-05-19 19:15:43,331   INFO  ****************Evaluation done.*****************
+2022-05-19 19:15:43,373   INFO  Epoch 39 has been evaluated
+2022-05-19 19:15:43,374   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_40.pth to GPU
+2022-05-19 19:15:45,089   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:15:45,543   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:15:45,550   INFO  *************** EPOCH 40 EVALUATION *****************
+2022-05-19 19:21:26,749   INFO  *************** Performance of EPOCH 40 *****************
+2022-05-19 19:21:26,750   INFO  Generate label finished(sec_per_example: 0.4086 second).
+2022-05-19 19:21:26,750   INFO  recall_roi_0.25: 0.247726
+2022-05-19 19:21:26,750   INFO  recall_rcnn_0.25: 0.245744
+2022-05-19 19:21:26,750   INFO  recall_roi_0.5: 0.113037
+2022-05-19 19:21:26,750   INFO  recall_rcnn_0.5: 0.093446
+2022-05-19 19:21:26,751   INFO  recall_roi_0.7: 0.034129
+2022-05-19 19:21:26,751   INFO  recall_rcnn_0.7: 0.022779
+2022-05-19 19:21:26,751   INFO  recall_roi_0.9: 0.001205
+2022-05-19 19:21:26,751   INFO  recall_rcnn_0.9: 0.000544
+2022-05-19 19:21:26,754   INFO  Average predicted number of objects(835 samples): 28.571
+2022-05-19 19:21:32,555   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.8228,     69.1923
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:71.9739,     69.3091
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0084,     86.4336
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.2774,     89.4127
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.8665,     19.2622
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.2102,     32.3238
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:21:32,555   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_40/test
+2022-05-19 19:21:32,555   INFO  ****************Evaluation done.*****************
+2022-05-19 19:21:32,591   INFO  Epoch 40 has been evaluated
+2022-05-19 19:21:32,641   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_41.pth to GPU
+2022-05-19 19:21:34,313   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:21:34,886   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:21:34,893   INFO  *************** EPOCH 41 EVALUATION *****************
+2022-05-19 19:27:18,129   INFO  *************** Performance of EPOCH 41 *****************
+2022-05-19 19:27:18,129   INFO  Generate label finished(sec_per_example: 0.4111 second).
+2022-05-19 19:27:18,130   INFO  recall_roi_0.25: 0.248814
+2022-05-19 19:27:18,130   INFO  recall_rcnn_0.25: 0.251030
+2022-05-19 19:27:18,130   INFO  recall_roi_0.5: 0.094263
+2022-05-19 19:27:18,130   INFO  recall_rcnn_0.5: 0.082679
+2022-05-19 19:27:18,130   INFO  recall_roi_0.7: 0.030281
+2022-05-19 19:27:18,130   INFO  recall_rcnn_0.7: 0.019902
+2022-05-19 19:27:18,130   INFO  recall_roi_0.9: 0.001633
+2022-05-19 19:27:18,131   INFO  recall_rcnn_0.9: 0.000194
+2022-05-19 19:27:18,134   INFO  Average predicted number of objects(835 samples): 28.320
+2022-05-19 19:27:24,024   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.2288,     72.0429
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.3361,     72.1203
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.1134,     86.5508
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3071,     89.4405
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:23.4206,     21.9983
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.1301,     32.4094
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:27:24,024   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_41/test
+2022-05-19 19:27:24,025   INFO  ****************Evaluation done.*****************
+2022-05-19 19:27:24,153   INFO  Epoch 41 has been evaluated
+2022-05-19 19:27:24,155   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_42.pth to GPU
+2022-05-19 19:27:25,810   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:27:26,366   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:27:26,391   INFO  *************** EPOCH 42 EVALUATION *****************
+2022-05-19 19:33:08,660   INFO  *************** Performance of EPOCH 42 *****************
+2022-05-19 19:33:08,661   INFO  Generate label finished(sec_per_example: 0.4099 second).
+2022-05-19 19:33:08,661   INFO  recall_roi_0.25: 0.247376
+2022-05-19 19:33:08,661   INFO  recall_rcnn_0.25: 0.248698
+2022-05-19 19:33:08,662   INFO  recall_roi_0.5: 0.103242
+2022-05-19 19:33:08,662   INFO  recall_rcnn_0.5: 0.088276
+2022-05-19 19:33:08,662   INFO  recall_roi_0.7: 0.031175
+2022-05-19 19:33:08,662   INFO  recall_rcnn_0.7: 0.020874
+2022-05-19 19:33:08,662   INFO  recall_roi_0.9: 0.000739
+2022-05-19 19:33:08,662   INFO  recall_rcnn_0.9: 0.000194
+2022-05-19 19:33:08,665   INFO  Average predicted number of objects(835 samples): 28.592
+2022-05-19 19:33:14,430   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.1358,     71.9125
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.2232,     74.4249
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0321,     86.4605
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3156,     89.4491
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.2038,     18.5348
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.3000,     32.3838
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:33:14,430   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_42/test
+2022-05-19 19:33:14,430   INFO  ****************Evaluation done.*****************
+2022-05-19 19:33:14,495   INFO  Epoch 42 has been evaluated
+2022-05-19 19:33:14,497   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_43.pth to GPU
+2022-05-19 19:33:16,077   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:33:16,531   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:33:16,537   INFO  *************** EPOCH 43 EVALUATION *****************
+2022-05-19 19:39:03,953   INFO  *************** Performance of EPOCH 43 *****************
+2022-05-19 19:39:03,954   INFO  Generate label finished(sec_per_example: 0.4161 second).
+2022-05-19 19:39:03,954   INFO  recall_roi_0.25: 0.248270
+2022-05-19 19:39:03,954   INFO  recall_rcnn_0.25: 0.245161
+2022-05-19 19:39:03,954   INFO  recall_roi_0.5: 0.107751
+2022-05-19 19:39:03,954   INFO  recall_rcnn_0.5: 0.086760
+2022-05-19 19:39:03,954   INFO  recall_roi_0.7: 0.033585
+2022-05-19 19:39:03,955   INFO  recall_rcnn_0.7: 0.022312
+2022-05-19 19:39:03,955   INFO  recall_roi_0.9: 0.000739
+2022-05-19 19:39:03,955   INFO  recall_rcnn_0.9: 0.000117
+2022-05-19 19:39:03,958   INFO  Average predicted number of objects(835 samples): 27.763
+2022-05-19 19:39:09,582   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.2945,     69.6502
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.3690,     69.6991
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.1044,     84.1622
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.4592,     87.0305
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.9174,     20.9807
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.1948,     34.6193
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:39:09,582   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_43/test
+2022-05-19 19:39:09,582   INFO  ****************Evaluation done.*****************
+2022-05-19 19:39:09,707   INFO  Epoch 43 has been evaluated
+2022-05-19 19:39:09,713   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_44.pth to GPU
+2022-05-19 19:39:11,243   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:39:11,703   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:39:11,708   INFO  *************** EPOCH 44 EVALUATION *****************
+2022-05-19 19:44:57,947   INFO  *************** Performance of EPOCH 44 *****************
+2022-05-19 19:44:57,948   INFO  Generate label finished(sec_per_example: 0.4147 second).
+2022-05-19 19:44:57,948   INFO  recall_roi_0.25: 0.246288
+2022-05-19 19:44:57,948   INFO  recall_rcnn_0.25: 0.246171
+2022-05-19 19:44:57,948   INFO  recall_roi_0.5: 0.096906
+2022-05-19 19:44:57,948   INFO  recall_rcnn_0.5: 0.081241
+2022-05-19 19:44:57,948   INFO  recall_roi_0.7: 0.026627
+2022-05-19 19:44:57,948   INFO  recall_rcnn_0.7: 0.020019
+2022-05-19 19:44:57,949   INFO  recall_roi_0.9: 0.001633
+2022-05-19 19:44:57,949   INFO  recall_rcnn_0.9: 0.000311
+2022-05-19 19:44:57,950   INFO  Average predicted number of objects(835 samples): 28.321
+2022-05-19 19:45:03,613   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:71.9955,     71.8118
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.0953,     71.8754
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0941,     86.5357
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3441,     89.4720
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.5368,     20.4433
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.3204,     34.6129
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:45:03,613   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_44/test
+2022-05-19 19:45:03,614   INFO  ****************Evaluation done.*****************
+2022-05-19 19:45:03,694   INFO  Epoch 44 has been evaluated
+2022-05-19 19:45:03,696   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_45.pth to GPU
+2022-05-19 19:45:05,332   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:45:05,778   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:45:05,799   INFO  *************** EPOCH 45 EVALUATION *****************
+2022-05-19 19:50:53,624   INFO  *************** Performance of EPOCH 45 *****************
+2022-05-19 19:50:53,624   INFO  Generate label finished(sec_per_example: 0.4166 second).
+2022-05-19 19:50:53,625   INFO  recall_roi_0.25: 0.245316
+2022-05-19 19:50:53,625   INFO  recall_rcnn_0.25: 0.245782
+2022-05-19 19:50:53,625   INFO  recall_roi_0.5: 0.099938
+2022-05-19 19:50:53,625   INFO  recall_rcnn_0.5: 0.080541
+2022-05-19 19:50:53,625   INFO  recall_roi_0.7: 0.027171
+2022-05-19 19:50:53,625   INFO  recall_rcnn_0.7: 0.020096
+2022-05-19 19:50:53,625   INFO  recall_roi_0.9: 0.000350
+2022-05-19 19:50:53,625   INFO  recall_rcnn_0.9: 0.000155
+2022-05-19 19:50:53,627   INFO  Average predicted number of objects(835 samples): 28.132
+2022-05-19 19:50:59,585   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.1527,     69.5235
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.2649,     72.0363
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0679,     86.5134
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:90.3155,     89.4288
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.0557,     18.2075
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:33.8849,     32.0247
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:50:59,585   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_45/test
+2022-05-19 19:50:59,586   INFO  ****************Evaluation done.*****************
+2022-05-19 19:50:59,658   INFO  Epoch 45 has been evaluated
+2022-05-19 19:50:59,660   INFO  ==> Loading parameters from checkpoint ../output/wanji_models/pdv/default/ckpt/checkpoint_epoch_46.pth to GPU
+2022-05-19 19:51:01,305   INFO  ==> Checkpoint trained from version: pcdet+0.1.0+024a369
+2022-05-19 19:51:01,874   INFO  ==> Done (loaded 272/272)
+2022-05-19 19:51:01,881   INFO  *************** EPOCH 46 EVALUATION *****************
+2022-05-19 19:56:52,089   INFO  *************** Performance of EPOCH 46 *****************
+2022-05-19 19:56:52,089   INFO  Generate label finished(sec_per_example: 0.4194 second).
+2022-05-19 19:56:52,090   INFO  recall_roi_0.25: 0.246093
+2022-05-19 19:56:52,090   INFO  recall_rcnn_0.25: 0.246171
+2022-05-19 19:56:52,090   INFO  recall_roi_0.5: 0.096906
+2022-05-19 19:56:52,090   INFO  recall_rcnn_0.5: 0.080735
+2022-05-19 19:56:52,090   INFO  recall_roi_0.7: 0.026938
+2022-05-19 19:56:52,090   INFO  recall_rcnn_0.7: 0.021224
+2022-05-19 19:56:52,090   INFO  recall_roi_0.9: 0.000505
+2022-05-19 19:56:52,090   INFO  recall_rcnn_0.9: 0.000155
+2022-05-19 19:56:52,091   INFO  Average predicted number of objects(835 samples): 27.769
+2022-05-19 19:56:57,792   INFO  
+bus AP@0.50, AP_R40@0.50:
+3d   AP:72.2893,     69.6460
+
+bus AP@0.25, AP_R40@0.25:
+3d   AP:72.3727,     72.1456
+
+car AP@0.50, AP_R40@0.50:
+3d   AP:81.0642,     86.5179
+
+car AP@0.25, AP_R40@0.25:
+3d   AP:81.4243,     86.9962
+
+bicycle AP@0.50, AP_R40@0.50:
+3d   AP:22.4381,     18.8372
+
+bicycle AP@0.25, AP_R40@0.25:
+3d   AP:34.4303,     32.5386
+
+pedestrian AP@0.50, AP_R40@0.50:
+3d   AP:0.0000,     0.0000
+
+pedestrian AP@0.25, AP_R40@0.25:
+3d   AP:0.0000,     0.0000
+
+2022-05-19 19:56:57,792   INFO  Result is save to /media/disk/02drive/05yueye/code/PDV/output/wanji_models/pdv/default/eval/eval_all_default/default/epoch_46/test
+2022-05-19 19:56:57,792   INFO  ****************Evaluation done.*****************
+2022-05-19 19:56:57,900   INFO  Epoch 46 has been evaluated
